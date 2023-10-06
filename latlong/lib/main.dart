@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:map_elevation/map_elevation.dart';
 
-import 'data.dart';
+import 'sun_earth.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,6 +24,8 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -35,10 +37,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('NASA spaceApps'),
       ),
       body: Stack(children: [
         FlutterMap(
-          options: new MapOptions(
+          options: MapOptions(
             center: LatLng(45.10, 5.48),
             zoom: 11.0,
           ),
@@ -48,10 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
               subdomains: ['a', 'b', 'c'],
             ),
             PolylineLayerOptions(
-              // Will only render visible polylines, increasing performance
               polylines: [
                 Polyline(
-                  // An optional tag to distinguish polylines in callback
                   points: getPoints(),
                   color: Colors.red,
                   strokeWidth: 3.0,
@@ -84,7 +85,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   setState(() {
                     hoverPoint = notification.position;
                   });
-
                   return true;
                 },
                 child: Elevation(
